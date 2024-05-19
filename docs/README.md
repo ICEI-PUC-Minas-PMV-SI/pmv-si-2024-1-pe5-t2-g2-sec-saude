@@ -5,7 +5,9 @@
   - ⁠Teste no servidor FTP;
   - ⁠Auxílio na coordenação das atividades do grupo
 - **Guilherme Augusto Pessoa de Castro**:
-  - A
+  - Instalação, configuração e extração dos mapas de monitoramento com Zabbix (On Premise) para os Servidores DHCP(On Premisses) via SNMP e Proxy(AWS) via Zabbix Agent.
+  - Preenchimento da documentação do projeto acerca dos itens acima;
+  - Auxílio a membros do grupo no cumprimento da tarefa
 - **João Paulo Maia de Paula**:
   - Preenchimento da documentação do projeto;
   - Auxílio aos colegas conforme necessidade em suas atividades;
