@@ -3,19 +3,21 @@
 - **Felipe Moreira de Oliveira**:
   - Apoio na documentação da etapa;
   - ⁠Teste no servidor FTP;
-  - ⁠Auxílio na coordenação das atividades do grupo
+  - ⁠Auxílio na coordenação das atividades do grupo.
 - **Guilherme Augusto Pessoa de Castro**:
   - Instalação, configuração e extração dos mapas de monitoramento com Zabbix (On Premise) para os Servidores DHCP(On Premisses) via SNMP e Proxy(AWS) via Zabbix Agent.
   - Preenchimento da documentação do projeto acerca dos itens acima;
-  - Auxílio a membros do grupo no cumprimento da tarefa
+  - Auxílio a membros do grupo no cumprimento da tarefa.
 - **João Paulo Maia de Paula**:
   - Preenchimento da documentação do projeto;
   - Auxílio aos colegas conforme necessidade em suas atividades;
-  - Criação e preenchimento do GitHub Classroom
+  - Criação e preenchimento do GitHub Classroom.
 - **Rafael Henrique de Souza Pereira**:
   - Instalação, configuração e extração dos mapas de monitoramento com Zabbix (Cloud) para o Servidor CUPS (Cloud) via Zabbix Agent;
   - Instalação, configuração e extração dos mapas de monitoramento com Zabbix (On Premise) para os Servidores AD e DNS (On Premise) via SNMP;
   - Preenchimento da documentação do projeto acerca dos itens acima;
-  - Auxílio na coordenação das atividades do grupo
+  - Auxílio na coordenação das atividades do grupo.
 - **Thiago Vinicius Costa Lara**:
-  - A
+  - Monitoramento do servidor em nuvem web;
+  - Aplicação do banco de dados utilizando a ferramenta Zabbix;
+  - Escrita e formatação do projeto.
