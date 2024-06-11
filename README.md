@@ -20,6 +20,6 @@ O enfoque do trabalho será no planejamento, na criação de protótipos, na imp
 
 ## Orientador
 
-* Fabio Leandro Rodrigues Cordeiro
+* Fábio Leandro Rodrigues Cordeiro
 
 
