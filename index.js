@@ -1,12 +1,12 @@
 import express from "express";
 import bodyParser from "body-parser";
-import ejs from "ejs";
 import pool from "./database.js";
 
 const app = express();
 const porta = 3000;
 
 app.set('view engine', 'ejs');
+app.set('views', './views');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("./public"));
