@@ -12,27 +12,27 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("./public"));
 
 app.get("/", (req, res) => {
-  res.render("index.ejs");
+  res.render("index.ejs", { titulo: "Página Inicial" });
 });
 
 app.get("/quem-somos", (req, res) => {
-  res.render("quem-somos.ejs");
+  res.render("quem-somos.ejs", { titulo: "Quem Somos" });
 });
 
 app.get("/unidades", (req, res) => {
-  res.render("unidades.ejs");
+  res.render("unidades.ejs", { titulo: "Unidades" });
 });
 
 app.get("/contato", (req, res) => {
-  res.render("contato.ejs");
+  res.render("contato.ejs", { titulo: "Contato" });
 });
 
 app.get("/area-do-cidadao", (req,res) => {
-  res.render("area-do-cidadao.ejs");
+  res.render("area-do-cidadao.ejs", { titulo: "Área do Cidadão" });
 });
 
 app.get("/cadastro-de-usuario", (req, res) => {
-  res.render("cadastro-de-usuario.ejs");
+  res.render("cadastro-de-usuario.ejs", { titulo: "Cadastro de Usuário" });
 });
 
 app.post("/check", (req, res) => {
