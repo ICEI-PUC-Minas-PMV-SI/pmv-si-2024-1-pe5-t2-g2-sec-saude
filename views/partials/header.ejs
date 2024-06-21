@@ -3,7 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= titulo %> - Secretaria de Saúde</title>
+  <title>Página inicial</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    header {
+      background-color: #0C0C0C;
+      color: white;
+      padding: 1rem;
+    }
+    nav {
+      display: flex;
+      justify-content: space-around;
+      background-color: #481E14;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 1rem;
+      display: block;
+    }
+    nav a:hover {
+      background-color: #9B3922;
+    }
+    .active {
+      background-color: #F2613F;
+    }
+  </style>
 </head>
 <body>
+  <header style="background-color: #f6f6f8; color: #4a4756; padding: 1rem;">
+    <img src="/images/logo tp.png" alt="Logo Secretária Alfa">
+    <h1>Secretária de saúde</h1>
+    <nav style="background-color: #49494A; display: flex; justify-content: space-around;">
+      <a href="/" style="color: white; text-decoration: none; padding: 1rem;">Página inicial</a>
+      <a href="/quem-somos" style="color: white; text-decoration: none; padding: 1rem;">Quem somos</a>
+      <a href="/unidades" style="color: white; text-decoration: none; padding: 1rem;">Unidades</a>
+      <a href="/contato" style="color: white; text-decoration: none; padding: 1rem;">Contato</a>
+      <a href="/area-do-cidadao" style="color: white; text-decoration: none; padding: 1rem;">Área do cidadão</a>
+    </nav>
+  </header>
   <main>
+    <h2>Bem vindo a página inicial</h2>
+  </main>
+</body>
+</html>
