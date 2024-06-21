@@ -49,7 +49,7 @@ pool.query(
         console.error(err.message);
         res.status(500).send("Erro no servidor");
       } else if (result.rows.length > 0) {
-        res.render("marcacao-de-consulta.ejs");
+        res.render("marcacao-de-consulta.ejs", { titulo: "Marcação de Consulta" });
       } else {
         res.send("Usuário ou senha incorretos");
       }
