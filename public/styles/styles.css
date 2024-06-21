@@ -1,5 +1,3 @@
-/* public/styles/styles.css */
-
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -8,8 +6,8 @@ body {
   }
   
   header {
-    background-color: #007b5e; /* A shade of green representing health */
-    color: white;
+    background-color: #effdff;
+    color: #4b4b4bdc;
     padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
@@ -23,13 +21,17 @@ body {
   }
   
   header .logo-container img {
-    height: 50px; /* Adjust based on your logo size */
+    height: 50px;
     margin-right: 1rem;
   }
   
   header h1 {
     margin: 0;
     font-size: 1.5rem;
+  }
+
+  header .h1-saude {
+    color: #ff5ba0;
   }
   
   nav ul {
@@ -41,20 +43,26 @@ body {
   }
   
   nav a {
-    color: white;
+    color: #4b4b4bdc;
     text-decoration: none;
-    padding: 0.5rem 1rem;
+    padding: 0.2rem 0.5rem;
     border-radius: 4px;
   }
   
   nav a:hover,
   nav a.active {
-    background-color: #005f47; /* Darker shade of green */
+    background-color: #e68a75;
+  }
+
+  .vertical-center {
+    margin: 1%; 
+    position: relative;
+    left: 20%;    
   }
   
   footer {
-    background-color: #007b5e;
-    color: white;
+    background-color: #4b4b4bdc;
+    color: #f6f6f8;
     padding: 1rem 0;
     text-align: center;
     position: relative;
@@ -72,7 +80,7 @@ body {
   }
   
   .footer-nav a {
-    color: white;
+    color: #f6f6f8;
     text-decoration: none;
   }
   
