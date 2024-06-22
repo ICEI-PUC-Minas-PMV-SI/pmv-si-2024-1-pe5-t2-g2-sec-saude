@@ -47,13 +47,35 @@ app.get("/contato", (req, res) => {
 });
 
 app.get("/area-do-cidadao", (req,res) => {
-  res.render("area-do-cidadao.ejs", { titulo: "Área do Cidadão", year: today.getFullYear(), username: req.session.username });
+  if (req.session.username) {
+    res.redirect("/marcacao-de-consulta");
+  } else {
+    res.render("area-do-cidadao.ejs", { titulo: "Área do Cidadão", year: today.getFullYear(), username: req.session.username });
+  }
+});
+
+app.get("/marcacao-de-consulta", isAuthenticated, async (req, res) => {
+  try {
+    const result = await pool.query(
+      "SELECT nome FROM users WHERE username = $1",
+      [req.session.username]
+    );
+    const nome = result.rows[0].nome;
+    res.render("marcacao-de-consulta.ejs", {
+      titulo: "Marcação de Consulta",
+      year: today.getFullYear(),
+      usuario: nome,
+      username: req.session.username
+    });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Erro ao carregar a página de marcação de consulta.");
+  }
 });
 
 app.get("/cadastro-de-usuario", (req, res) => {
   res.render("cadastro-de-usuario.ejs", { titulo: "Cadastro de Usuário", year: today.getFullYear(), username: req.session.username });
 });
-
 
 //Queries
 app.post("/check", async (req, res) => {
