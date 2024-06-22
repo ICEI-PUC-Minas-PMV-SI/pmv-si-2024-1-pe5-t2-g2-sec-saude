@@ -1,5 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
+import session from "express-session";
 import pool from "./database.js";
 
 const app = express();
@@ -11,6 +12,21 @@ app.set('views', './views');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("./public"));
+
+app.use(session({
+  secret: '111111',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }
+}));
+
+function isAuthenticated(req, res, next) {
+  if (req.session.username) {
+    return next();
+  } else {
+    res.redirect("/area-do-cidadao");
+  }
+}
 
 //Rotas
 app.get("/", (req, res) => {
@@ -53,6 +69,7 @@ app.post("/check", async (req, res) => {
     );
 
     if (result.rows.length > 0) {
+      req.session.username = username;
       const nomeResult = await pool.query(
         "SELECT nome FROM users WHERE username = $1 AND password = $2",
         [username, password]
@@ -79,7 +96,19 @@ app.post("/check", async (req, res) => {
     res.status(500).send("Erro no servidor");
   }
 });
-  
+
+app.get("/gerenciar-conta", isAuthenticated, async (req, res) => {
+  try {
+    const result = await pool.query(
+      "SELECT *FROM users WHERE username = $1", [req.session.username]
+    );
+    const user = result.rows[0];
+    res.render("gerenciar-conta.ejs", { titulo: "Gerenciar Conta", year: today.getFullYear(), usuario: user });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Erro ao buscar dados do usuário.");
+  }
+});
 
 app.post("/criar-usuario", (req, res) => {
   const { username, password, nome, email } = req.body;
