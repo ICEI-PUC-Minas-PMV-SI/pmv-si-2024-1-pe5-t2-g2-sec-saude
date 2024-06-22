@@ -199,6 +199,16 @@ app.post("/excluir-conta", isAuthenticated, async (req, res) => {
   }
 });
 
+app.get("/logoff", (req, res) => {
+  req.session.destroy(err => {
+    if (err) {
+      console.error(err.message);
+      return res.status(500).send("Erro ao fazer logoff.");
+    }
+    res.redirect("/area-do-cidadao");
+  });
+});
+
 app.listen(porta, () => {
   console.log(`Listening on port ${porta}`);
 });
