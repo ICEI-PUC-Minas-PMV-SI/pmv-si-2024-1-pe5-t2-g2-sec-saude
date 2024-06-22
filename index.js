@@ -30,27 +30,27 @@ function isAuthenticated(req, res, next) {
 
 //Rotas
 app.get("/", (req, res) => {
-  res.render("index.ejs", { titulo: "Página Inicial", year: today.getFullYear() });
+  res.render("index.ejs", { titulo: "Página Inicial", year: today.getFullYear(), username: req.session.username });
 });
 
 app.get("/quem-somos", (req, res) => {
-  res.render("quem-somos.ejs", { titulo: "Quem Somos", year: today.getFullYear() });
+  res.render("quem-somos.ejs", { titulo: "Quem Somos", year: today.getFullYear(), username: req.session.username });
 });
 
 app.get("/unidades", (req, res) => {
-  res.render("unidades.ejs", { titulo: "Unidades", year: today.getFullYear() });
+  res.render("unidades.ejs", { titulo: "Unidades", year: today.getFullYear(), username: req.session.username });
 });
 
 app.get("/contato", (req, res) => {
-  res.render("contato.ejs", { titulo: "Contato", year: today.getFullYear() });
+  res.render("contato.ejs", { titulo: "Contato", year: today.getFullYear(), username: req.session.username });
 });
 
 app.get("/area-do-cidadao", (req,res) => {
-  res.render("area-do-cidadao.ejs", { titulo: "Área do Cidadão", year: today.getFullYear() });
+  res.render("area-do-cidadao.ejs", { titulo: "Área do Cidadão", year: today.getFullYear(), username: req.session.username });
 });
 
 app.get("/cadastro-de-usuario", (req, res) => {
-  res.render("cadastro-de-usuario.ejs", { titulo: "Cadastro de Usuário", year: today.getFullYear() });
+  res.render("cadastro-de-usuario.ejs", { titulo: "Cadastro de Usuário", year: today.getFullYear(), username: req.session.username });
 });
 
 
@@ -79,7 +79,8 @@ app.post("/check", async (req, res) => {
       res.render("marcacao-de-consulta.ejs", {
         titulo: "Marcação de Consulta",
         year: today.getFullYear(),
-        usuario: nome
+        usuario: nome,
+        username: req.session.username
       });
     } else {
       res.send(`
@@ -97,51 +98,104 @@ app.post("/check", async (req, res) => {
   }
 });
 
-app.get("/gerenciar-conta", isAuthenticated, async (req, res) => {
-  try {
-    const result = await pool.query(
-      "SELECT *FROM users WHERE username = $1", [req.session.username]
-    );
-    const user = result.rows[0];
-    res.render("gerenciar-conta.ejs", { titulo: "Gerenciar Conta", year: today.getFullYear(), usuario: user });
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Erro ao buscar dados do usuário.");
-  }
-});
-
-app.post("/criar-usuario", (req, res) => {
+app.post("/criar-usuario", async (req, res) => {
   const { username, password, nome, email } = req.body;
 
   if (!username || !password || !nome || !email) {
     return res.status(400).send("Todos os campos são obrigatórios.");
   }
 
-  pool.query(
-    "INSERT INTO users (username, password, nome, email) VALUES ($1, $2, $3, $4)",
-    [username, password, nome, email],
-    (err, result) => {
-      if (err) {
-        console.error(err.message);
-        return res.status(500).send(`
-        <p>Erro ao efetuar o cadastro.</p>
-        <script>
-          setTimeout(() => {
-            window.location.href = "/area-do-cidadao";
-          }, 3000);
-        </script>
-      `);
+  try {
+    await pool.query(
+      "INSERT INTO users (username, password, nome, email) VALUES ($1, $2, $3, $4)",
+      [username, password, nome, email],
+      (err, result) => {
+        if (err) {
+          console.error(err.message);
+          return res.status(500).send(`
+          <p>Erro ao efetuar o cadastro.</p>
+          <script>
+            setTimeout(() => {
+              window.location.href = "/area-do-cidadao";
+            }, 3000);
+          </script>
+        `);
+        }
+        res.send(`
+          <p>Cadastro realizado com sucesso!</p>
+          <script>
+            setTimeout(() => {
+              window.location.href = "/area-do-cidadao";
+            }, 3000);
+          </script>
+        `);  
       }
-      res.send(`
-        <p>Cadastro realizado com sucesso!</p>
-        <script>
-          setTimeout(() => {
-            window.location.href = "/area-do-cidadao";
-          }, 3000);
-        </script>
-      `);  
-    }
-  );
+    );
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Erro ao criar usuário.");
+  }
+});
+
+app.get("/gerenciar-conta", isAuthenticated, async (req, res) => {
+  try {
+    const result = await pool.query(
+      "SELECT *FROM users WHERE username = $1", [req.session.username]
+    );
+    const user = result.rows[0];
+    res.render("gerenciar-conta.ejs", { titulo: "Gerenciar Conta", year: today.getFullYear(), usuario: user, username: req.session.username });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Erro ao buscar dados do usuário.");
+  }
+});
+
+app.post("/atualizar-dados", isAuthenticated, async (req, res) => {
+  const { nome, email, password } = req.body;
+  const username = req.session.username;
+
+  if (!nome || !email || !password) {
+    return res.status(400).send("Todos os campos são obrigatórios.");
+  }
+
+  try {
+    await pool.query(
+      "UPDATE users SET nome = $1, email = $2, password = $3 WHERE username = $4", [nome, email, password, username]
+    );
+    res.send(`
+      <p>Dados atualizados com sucesso!</p>
+      <script>
+        setTimeout(() => {
+          window.location.href = "gerenciar-conta";
+        }, 3000);
+      </script>
+    `);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Erro ao atualizar dados do usuário.");
+  }
+});
+
+app.post("/excluir-conta", isAuthenticated, async (req, res) => {
+  const username = req.session.username;
+
+  try {
+    await pool.query(
+      "DELETE FROM users WHERE username = $1", [username]
+    );
+    req.session.destroy();
+    res.send(`
+      <p>Conta excluída com sucesso!</p>
+      <script>
+        setTimeout(() => {
+          window.location.href = "/area-do-cidadao";
+        }, 3000);
+      </script>
+    `);
+  } catch (err){
+    console.error(err.message);
+    res.status(500).send("Erro ao excluir conta.");
+  }
 });
 
 app.listen(porta, () => {
