@@ -12,6 +12,7 @@ app.set('views', './views');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("./public"));
 
+//Rotas
 app.get("/", (req, res) => {
   res.render("index.ejs", { titulo: "Página Inicial", year: today.getFullYear() });
 });
@@ -36,34 +37,49 @@ app.get("/cadastro-de-usuario", (req, res) => {
   res.render("cadastro-de-usuario.ejs", { titulo: "Cadastro de Usuário", year: today.getFullYear() });
 });
 
-app.post("/check", (req, res) => {
+
+//Queries
+app.post("/check", async (req, res) => {
   const { username, password } = req.body;
-  if(!username || !password) {
+  if (!username || !password) {
     res.status(400).send("Username e Password são obrigatórios.");
     return;
   }
 
-  pool.query(
-      "SELECT * FROM users WHERE username = $1 AND password = $2", [username, password],
-      (err, result) => {
-        if (err) {
-          console.error(err.message);
-          res.status(500).send("Erro no servidor");
-        } else if (result.rows.length > 0) {
-          res.render("marcacao-de-consulta.ejs", { titulo: "Marcação de Consulta", year: today.getFullYear() });
-        } else {
-          res.send(`
-            <p>Usuário ou senha incorretos</p>
-            <script>
-              setTimeout(() => {
-                window.location.href = "/area-do-cidadao";
-              }, 3000);
-            </script>
-          `);
-        }
-      }
+  try {
+    const result = await pool.query(
+      "SELECT * FROM users WHERE username = $1 AND password = $2",
+      [username, password]
     );
+
+    if (result.rows.length > 0) {
+      const nomeResult = await pool.query(
+        "SELECT nome FROM users WHERE username = $1 AND password = $2",
+        [username, password]
+      );
+      const nome = nomeResult.rows[0].nome;
+
+      res.render("marcacao-de-consulta.ejs", {
+        titulo: "Marcação de Consulta",
+        year: today.getFullYear(),
+        usuario: nome
+      });
+    } else {
+      res.send(`
+        <p>Usuário ou senha incorretos</p>
+        <script>
+          setTimeout(() => {
+            window.location.href = "/area-do-cidadao";
+          }, 3000);
+        </script>
+      `);
+    }
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Erro no servidor");
+  }
 });
+  
 
 app.post("/criar-usuario", (req, res) => {
   const { username, password, nome, email } = req.body;
