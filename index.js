@@ -22,11 +22,12 @@ app.use(session({
 
 function isAuthenticated(req, res, next) {
   if (req.session.username) {
+    res.locals.username = req.session.username;
     return next();
   } else {
     res.redirect("/area-do-cidadao");
   }
-}
+};
 
 //Rotas
 app.get("/", (req, res) => {
@@ -69,11 +70,11 @@ app.post("/check", async (req, res) => {
     );
 
     if (result.rows.length > 0) {
-      req.session.username = username;
       const nomeResult = await pool.query(
         "SELECT nome FROM users WHERE username = $1 AND password = $2",
         [username, password]
       );
+      req.session.username = username;
       const nome = nomeResult.rows[0].nome;
 
       res.render("marcacao-de-consulta.ejs", {
@@ -140,7 +141,7 @@ app.post("/criar-usuario", async (req, res) => {
 app.get("/gerenciar-conta", isAuthenticated, async (req, res) => {
   try {
     const result = await pool.query(
-      "SELECT *FROM users WHERE username = $1", [req.session.username]
+      "SELECT * FROM users WHERE username = $1", [req.session.username]
     );
     const user = result.rows[0];
     res.render("gerenciar-conta.ejs", { titulo: "Gerenciar Conta", year: today.getFullYear(), usuario: user, username: req.session.username });
