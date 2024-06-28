@@ -1,16 +1,19 @@
 <%- include("partials/header.ejs") %>
 
-<h1 style="text-align: center;">Área do Cidadão</h1>
-  <form style="padding-left: 35%;" action="/check" method="post">
-    <label for="username">Nome de Usuário:</label>
-    <input type="text" id="username" name="username" required>
-    <br>
-    <label for="password">Senha:</label>
-    <input style="margin-left: 79px; margin-top: 5px;" type="password" id="password" name="password" required>
-    <br>
-    <button class="vertical-center" type="submit">Entrar</button>
-    <br>
-    <a href="cadastro-de-usuario" style="padding-left: 100px;">Cadastrar Novo Usuário</a>
-  </form>
+<main>
+    <div class="login-container">
+        <h2>Área do Cidadão</h2>
+        <form action="/check" method="post" class="login-form">
+            <label for="username">Nome de Usuário:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Senha:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Entrar</button>
+        </form>
+        <a href="cadastro-de-usuario" class="register-link">Cadastrar Novo Usuário</a>
+    </div>
+</main>
 
 <%- include("partials/footer.ejs") %>

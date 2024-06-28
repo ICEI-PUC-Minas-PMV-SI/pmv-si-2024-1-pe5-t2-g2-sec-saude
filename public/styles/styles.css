@@ -1,90 +1,181 @@
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f6f6f8;
-    color: #4a4756;
-  }
-  
-  header {
-    background-color: #effdff;
-    color: #4b4b4bdc;
-    padding: 1rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  header .logo-container {
-    display: flex;
-    align-items: center;
-  }
-  
-  header .logo-container img {
-    height: 50px;
-    margin-right: 1rem;
-  }
-  
-  header h1 {
-    margin: 0;
-    font-size: 1.5rem;
-  }
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f6f6f8;
+  color: #4a4756;
+}
 
-  header .h1-saude {
-    color: #ff5ba0;
-  }
-  
-  nav ul {
-    list-style: none;
-    display: flex;
-    gap: 1.5rem;
-    margin: 0;
-    padding: 0;
-  }
-  
-  nav a {
-    color: #4b4b4bdc;
-    text-decoration: none;
-    padding: 0.2rem 0.5rem;
-    border-radius: 4px;
-  }
-  
-  nav a:hover,
-  nav a.active {
-    background-color: #e68a75;
-  }
+/* HEADER */
 
-  .vertical-center {
-    margin: 1%; 
-    position: relative;
-    left: 20%;    
-  }
-  
-  footer {
-    background-color: #4b4b4bdc;
-    color: #f6f6f8;
-    padding: 1rem 0;
-    text-align: center;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-  }
-  
-  .footer-nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    margin: 1rem 0 0;
-    padding: 0;
-  }
-  
-  .footer-nav a {
-    color: #f6f6f8;
-    text-decoration: none;
-  }
-  
-  .footer-nav a:hover {
-    color: #F2613F;
-  }
-  
+header {
+  background-color: #effdff;
+  color: #4b4b4bdc;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header .logo-container {
+  display: flex;
+  align-items: center;
+}
+
+header .logo-container img {
+  height: 50px;
+  margin-right: 1rem;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+header .h1-saude {
+  color: #ff5ba0;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  color: #4b4b4bdc;
+  text-decoration: none;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+
+nav a:hover,
+nav a.active {
+  background-color: #e68a75;
+}
+
+.vertical-center {
+  margin: 1%;
+  position: relative;
+  left: 20%;
+}
+
+/* FOOTER */
+
+footer {
+  background-color: #4b4b4bdc;
+  color: #f6f6f8;
+  padding: 1rem 0;
+  text-align: center;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer-nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 1rem 0 0;
+  padding: 0;
+}
+
+.footer-nav a {
+  color: #f6f6f8;
+  text-decoration: none;
+}
+
+.footer-nav a:hover {
+  color: #F2613F;
+}
+
+.footer-container {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  border-top: 2px solid #ccc;
+}
+
+.footer-container nav ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+}
+
+.footer-container nav ul li {
+  margin: 0 10px;
+}
+
+.footer-container nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* LOGIN */
+
+.login-container {
+  background-color: #ffffff;
+  padding: 40px;
+  max-width: 400px;
+  margin: 40px auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-container h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+  text-align: center;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form label {
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.login-form input {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.login-form button {
+  padding: 10px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login-form button:hover {
+  background-color: #218838;
+}
+
+.register-link {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.register-link:hover {
+  text-decoration: underline;
+}
+
+
