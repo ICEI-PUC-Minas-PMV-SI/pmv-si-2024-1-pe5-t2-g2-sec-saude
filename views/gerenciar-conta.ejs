@@ -1,21 +1,24 @@
 <%- include("partials/header.ejs") %>
 
-<h1>Gerenciar conta - Atualizar dados</h1>
-  <form action="/atualizar-dados" method="POST">
-    <label for="nome">Nome:</label>
-    <input type="text" id="nome" name="nome" value="<%= usuario.nome %>" required>
-    <br>
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" value="<%= usuario.email %>" required>
-    <br>
-    <label for="senha">Senha:</label>
-    <input type="password" name="password" id="password" required>
-    <br>
-    <button type="submit">Atualizar</button>
-  </form>
+<main>
+    <div class="login-container">
+        <h2>Gerenciar conta - Atualizar dados</h2>
+        <form action="/atualizar-dados" method="POST" class="login-form">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" value="<%= usuario.nome %>" required>
 
-  <form action="/excluir-conta" method="POST">
-    <button type="submit">Excluir Conta</button>
-  </form>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="<%= usuario.email %>" required>
+
+            <label for="password">Senha:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Atualizar</button>
+        </form>
+        <form action="/excluir-conta" method="POST" class="delete-account-form">
+            <button type="submit" class="delete-button">Excluir Conta</button>
+        </form>
+    </div>
+</main>
 
 <%- include("partials/footer.ejs") %>

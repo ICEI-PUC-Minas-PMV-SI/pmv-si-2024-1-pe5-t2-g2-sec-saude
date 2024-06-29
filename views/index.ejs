@@ -1,17 +1,33 @@
 <%- include("partials/header.ejs") %>
-<style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-    }
-    .text-container {
-        padding-left: 1%;
-    }
-  </style>
-<div class="text-container">
-    <h1>TESTE</h1> <!-- EJS syntax to include dynamic content -->
-    <!-- Your webpage content here -->
-</div>
-INDEX BODY
+
+<main>
+    <div class="hero">
+        <h1>Bem-vindo ao Portal de Saúde</h1>
+        <p>Seu portal de informações e serviços de saúde.</p>
+    </div>
+
+    <div class="initial-content-container">
+        <section class="overview">
+            <h2>Nossos Serviços</h2>
+            <p>Oferecemos uma variedade de serviços de saúde para a comunidade, incluindo consultas médicas, vacinação, e programas de bem-estar.</p>
+        </section>
+
+        <section class="news">
+            <h2>Últimas Notícias</h2>
+            <article>
+                <h3>Campanha de Vacinação 2024</h3>
+                <img src="/images/vacinacao pref.png" alt="Vacinação pela prefeitura">
+                <p>Participe da nossa campanha de vacinação para manter a saúde da comunidade. Confira os locais e horários.</p>
+                <a href="#" class="read-more-link">Leia mais</a>
+            </article>
+            <article>
+                <h3>Nova Unidade de Saúde</h3>
+                <img src="/images/centro saude.png" alt="Vacinação pela prefeitura">
+                <p>Estamos inaugurando uma nova unidade de saúde para melhor atender a população. Saiba mais sobre os serviços disponíveis.</p>
+                <a href="#" class="read-more-link">Leia mais</a>
+            </article>
+        </section>
+    </div>
+</main>
 
 <%- include("partials/footer.ejs") %>
