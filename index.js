@@ -6,6 +6,7 @@ import pool from "./database.js";
 const app = express();
 const porta = 3000;
 const today = new Date();
+const API_URL = "https://localhost:44374";
 
 app.set('view engine', 'ejs');
 app.set('views', './views');
