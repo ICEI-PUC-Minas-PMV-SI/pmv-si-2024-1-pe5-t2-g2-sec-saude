@@ -32,21 +32,12 @@ function isAuthenticated(req, res, next) {
 
 //Rotas
 app.get("/", (req, res) => {
-  res.render("index.ejs", { titulo: "Página Inicial", year: today.getFullYear(), username: req.session.username });
+  res.render("login.ejs", { titulo: "Página Inicial", year: today.getFullYear(), username: req.session.username });
 });
 
-app.get("/quem-somos", (req, res) => {
-  res.render("quem-somos.ejs", { titulo: "Quem Somos", year: today.getFullYear(), username: req.session.username });
-});
 
-app.get("/unidades", (req, res) => {
-  res.render("unidades.ejs", { titulo: "Unidades", year: today.getFullYear(), username: req.session.username });
-});
 
-app.get("/contato", (req, res) => {
-  res.render("contato.ejs", { titulo: "Contato", year: today.getFullYear(), username: req.session.username });
-});
-
+/*
 app.get("/area-do-cidadao", (req,res) => {
   if (req.session.username) {
     res.redirect("/marcacao-de-consulta");
@@ -231,6 +222,7 @@ app.get("/logoff", (req, res) => {
     res.redirect("/area-do-cidadao");
   });
 });
+*/
 
 app.listen(porta, () => {
   console.log(`Listening on port ${porta}`);
