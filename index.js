@@ -35,7 +35,14 @@ app.get("/", (req, res) => {
   res.render("login.ejs", { titulo: "Página Inicial", year: today.getFullYear(), username: req.session.username });
 });
 
+app.get("/area-logada-paciente", async (req, res) => {
+  try {
+    const response = await axios.get(`${API_URL}/api/Consultas`);
+    res.render("area-logada-paciente.ejs", {  })
+  } catch (err) {
 
+  }
+});
 
 /*
 app.get("/area-do-cidadao", (req,res) => {
