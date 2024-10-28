@@ -7,6 +7,7 @@ const app = express();
 const porta = 3000;
 const today = new Date();
 const API_URL = "https://localhost:44374";
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwidW5pcXVlX25hbWUiOiJBZG1pbmlzdHJhZG9yIiwiZW1haWwiOiJhZG1pbkBlbWFpbC5jb20uYnIiLCJyb2xlIjoiQWRtaW5pc3RyYWRvciIsIm5iZiI6MTcyNzQ1NDkxNiwiZXhwIjoxNzI3NDgzNzE2LCJpYXQiOjE3Mjc0NTQ5MTZ9.rtoll98kyGoG8ECkQI2m18jBcOoR3wIYzsby3l2J0_M";
 
 app.set('view engine', 'ejs');
 app.set('views', './views');
@@ -32,7 +33,7 @@ function isAuthenticated(req, res, next) {
 
 //Rotas
 app.get("/", (req, res) => {
-  res.render("login.ejs", { titulo: "Página Inicial", year: today.getFullYear(), usuario: "teste" });
+  res.render("marcar-consulta.ejs", { titulo: "Página Inicial", year: today.getFullYear(), usuario: "teste", data: "25/12", horario: "12:00", medico: "Dr.", especialidade: "açougueiro" });
 });
 
 app.post("/check", async (req, res) => {
@@ -62,7 +63,7 @@ app.post("/check", async (req, res) => {
     case 2:
       res.render("area-logada-paciente.ejs");
       break;
-      
+
     default:
       break;
   }
@@ -75,11 +76,37 @@ app.post("/check", async (req, res) => {
 app.get("/area-logada-paciente", async (req, res) => {
   try {
     const response = await axios.get(`${API_URL}/api/Consultas`);
-    res.render("area-logada-paciente.ejs", { titulo: "Área Paciente", year: today.getFullYear(), usuario: "Teste" })
+    res.render("area-logada-paciente.ejs", { titulo: "Área Paciente", year: today.getFullYear(), usuario: "Teste",  data: response.dataConsulta, horario: response.horaConsulta, medico: "", especialidade: "" })
   } catch (err) {
-
+    console.log(err);
   }
 });
+
+app.get("/area-logada-administrador", async (req, res) => {
+  try {
+    const response1 = await axios.get(`${API_URL}/api/Usuarios`);
+    const response2 = await axios.get(`${API_URL}/api/Medicos`);
+    const response3 = await axios.get(`${API_URL}/api/Consultas`);
+
+    res.render("area-logada-administrador.ejs", { titulo: "Área Administrador", year: today.getFullYear(), usuarios: response1.length, medicos: response2.length, consultas: response3.length });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+app.get("/area-logada-medico", async (req, res) => {
+  try {
+    const response1 = await axios.get(`${API_URL}/api/Usuarios`);
+    const response2 = await axios.get(`${API_URL}/api/Medicos`);
+    const response3 = await axios.get(`${API_URL}/api/Consultas`);
+
+    res.render("area-logada-medico.ejs", { titulo: "Área Médico", year: today.getFullYear() });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+
 
 /*
 app.get("/area-do-cidadao", (req,res) => {
