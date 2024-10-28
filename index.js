@@ -32,13 +32,50 @@ function isAuthenticated(req, res, next) {
 
 //Rotas
 app.get("/", (req, res) => {
-  res.render("login.ejs", { titulo: "Página Inicial", year: today.getFullYear(), username: req.session.username });
+  res.render("login.ejs", { titulo: "Página Inicial", year: today.getFullYear(), usuario: "teste" });
+});
+
+app.post("/check", async (req, res) => {
+  const email = req.body["email"];
+  const password = req.body["password"];
+  
+  try {
+    const response = await axios.get(`${API_URL}/api/Usuarios`);
+    response.forEach(user => {
+      if(user.email === email) {
+        if(user.senha === password) {
+          usuario = { user };
+        }
+      } 
+    }
+  );
+
+  switch (usuario.perfil) {
+    case 0:
+      res.render("area-logada-administrador.ejs");
+      break;
+    
+    case 1:
+      res.render("area-logada-medico.ejs");
+      break;
+    
+    case 2:
+      res.render("area-logada-paciente.ejs");
+      break;
+      
+    default:
+      break;
+  }
+  } catch (error) {
+    console.log(error);
+  }
+
 });
 
 app.get("/area-logada-paciente", async (req, res) => {
   try {
     const response = await axios.get(`${API_URL}/api/Consultas`);
-    res.render("area-logada-paciente.ejs", {  })
+    res.render("area-logada-paciente.ejs", { titulo: "Área Paciente", year: today.getFullYear(), usuario: "Teste" })
   } catch (err) {
 
   }
