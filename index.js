@@ -106,7 +106,17 @@ app.get("/area-logada-medico", async (req, res) => {
   }
 });
 
+app.get("/marcar-consulta", async (req, res) => {
+  res.render("marcar-consulta.ejs");
+});
 
+app.post("/marcar-consulta", async (req, res) => {
+  // const especialidade = req.body["especialidade"];
+  // const medico = req.body["medico"];
+  // const consulta = req.body["consulta"];
+
+  // const envio = await axios.post(`${API_URL}/api/Consultas`);
+});
 
 /*
 app.get("/area-do-cidadao", (req,res) => {
